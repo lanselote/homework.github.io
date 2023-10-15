@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文学作品</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            padding: 10px;
+            background: #f1f1f1;
+        }
+
+        /* 头部标题 */
+        .header {
+            padding: 10px;
+            text-align: center;
+            background: white;
+        }
+
+        .header h1 {
+            font-size: 50px;
+        }
+
+        /* 导航条 */
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        /* 导航条链接 */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* 链接颜色修改 */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* 创建两列 */
+        /* Left column */
+        .leftcolumn {
+            float: left;
+            width: 75%;
+        }
+
+        /* 右侧栏 */
+        .rightcolumn {
+            float: left;
+            width: 25%;
+            background-color: #f1f1f1;
+            padding-left: 20px;
+        }
+
+        /* 图像部分 */
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* 文章卡片效果 */
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* 列后面清除浮动 */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* 底部 */
+        .footer {
+            padding: 10px;
+            text-align: center;
+            background: #ddd;
+            margin-top: 20px;
+        }
+
+        /* 响应式布局 - 屏幕尺寸小于 800px 时，两列布局改为上下布局 */
+        @media screen and (max-width: 800px) {
+
+            .leftcolumn,
+            .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+        /* 响应式布局 -屏幕尺寸小于 400px 时，导航等布局改为上下布局 */
+        @media screen and (max-width: 400px) {
+            .topnav a {
+                float: none;
+                width: 100%;
+            }
+        }
+
+        /*图片*/
+        img {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #myImg:hover {
+            opacity: 0.7;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation */
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0.1)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>一个普通的网站</h1>
+        <p>2023.10.16</p>
+    </div>
+
+    <div class="topnav">
+        <a href="村上春树.html">村上春树代表作品及简介</a>
+        <a href="东野圭吾.html">东野圭吾代表作品及简介</a>
+    </div>
+
+    <div class="row">
+        <div class="leftcolumn">
+            <div class="card">
+                <h2>村上春树</h2>
+                <h5>1949年1月12日出生于日本京都市伏见区,日本当代作家</h5>
+                <img id="myImg"
+                    src="https://5b0988e595225.cdn.sohucs.com/images/20190113/2193c38658be4f04ba83a9fcceca6e28.jpeg"
+                    alt="村上春树" width="1100" height="400">
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <span class="close">×</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+
+                <script>
+                    // 获取模态窗口
+                    var modal = document.getElementById('myModal');
+
+                    // 获取图片模态框，alt 属性作为图片弹出中文本描述
+                    var img = document.getElementById('myImg');
+                    var modalImg = document.getElementById("img01");
+                    var captionText = document.getElementById("caption");
+                    img.onclick = function () {
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+                        modalImg.alt = this.alt;
+                        captionText.innerHTML = this.alt;
+                    }
+
+                    // 获取 <span> 元素，设置关闭模态框按钮
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // 点击 <span> 元素上的 (x), 关闭模态框
+                    span.onclick = function () {
+                        modal.style.display = "none";
+                    }
+                </script>
+                <p>代表作有《世界尽头与冷酷仙境》《挪威的森林》《海边的卡夫卡》《1Q84》等。村上春树的写作风格充满了魔幻、现实和超现实主义的元素,同时又具有简洁、轻松和愉快的特点。他的作品让读者深入思考人生、世界和人性的问题，同时也能带来阅读的乐趣和享受。
+                </p>
+            </div>
+            <div class="card">
+                <h2>东野圭吾
+                </h2>
+                <h5>1958年2月4日出生于日本大阪,日本推理小说作家,毕业于大阪府立大学电气工学专业,之后在汽车零件供应商日本电装担任生产技术工程师。</h5>
+                <img id="myImg"
+                    src="https://nimg.ws.126.net/?url=http%3A%2F%2Fspider.ws.126.net%2F70339647ce9f0d491ca16bee6df59999.jpeg&thumbnail=660x2147483647&quality=80&type=jpg"
+                    alt="东野圭吾" width="1100" height="400">
+                <p>代表作有《放学后》《秘密》《白夜行》《嫌疑人X的献身》《预知梦》等。东野圭吾的写作风格以简洁、冷静和诡异为特点。他的语言简单而精准,不浪费任何多余的文字,直击读者的心灵。他的情节诡异而惊险,不按常理出牌,让读者难以预测结局。他善于利用悬念和反转来制造惊喜和震撼,让读者目不暇接。
+                </p>
+            </div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card">
+                <h2>小组成员</h2>
+                <div class="fakeimg" style="height:100px;">小组分工：</div>
+            </div>
+            <div class="card">
+                <h3>来充字数的鸡汤(???)板块</h3>
+                <div class="fakeimg">
+                    <p>任凭怎么解释，世人也只能相信自己愿意相信的事情。越是拼命挣扎，我们的处境越是狼狈。——村上春树 《挪威的森林》</p>
+                    <p>要选择这个就要舍弃那个，如此反复，这就是人生。——东野圭吾</p>
+                    <p>世上有两样东西不可直视，一是太阳，二是人心。——东野圭吾</p>
+
+                </div>
+                <div class="fakeimg">
+                    <p></p>
+                </div>
+                <div class="fakeimg">
+                    <p></p>
+                </div>
+            </div>
+            <div class="card">
+                <h3>了解更多</h3>
+                <a href="https://baike.baidu.com/item/%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A0%91/1070?fr=ge_ala">村上春树人物百科</a><p></p>
+                <a href="https://baike.baidu.com/link?url=n9RTO-SmZdTTlM7EjfhQmU1QEDHh3WXJpM4-GgEvLUMufkh2ZyDk-K_CBfwIs4xPgijeZezcvIeU3_ycsIF75IYhYSrQTPrVm309LO8yhWjMVKy7uetHiFm08XPiMIKE">东野圭吾人物百科</a><p></p>
+                <a href="https://m.baidu.com/sf?pd=topone_multi&top=%7B%22sfhs%22%3A1%7D&atn=index&word=%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE%E6%9C%80%E7%83%A7%E8%84%91%E7%9A%84%E4%BA%94%E6%9C%AC&lid=17769982460516725796&key=tf3Ye2F5E28F08l6ijVV8tHLDduQGwK%2B2OUfpwRfNavtXrCS3gjlgTWOG%2Fy6%2FwrMO9YtvUTa0gVFqMWbExBJ1B3GCY70Gi6lEHq7m%2BpUHQWkoVFfp8cafz%2BJM733WDck&type=bpage">东野圭吾几本经典的推理小说</a><p></p>
+                <a href="https://baijiahao.baidu.com/s?id=1763656240263233079&wfr=spider&for=pc">他国媒体对村上春树的一些评价</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>发疯专用</h2>
+    </div>
+</body>
+
+</html>
